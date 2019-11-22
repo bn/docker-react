@@ -1,0 +1,18 @@
+# Specify a base image
+FROM node:alpine
+
+# Specify base dir
+WORKDIR /app
+
+# install some dependecies
+COPY package.json .
+COPY .npmrc .
+RUN npm install
+
+# copy the rest
+COPY . .
+
+# Default command
+CMD ["npm", "run", "start"]
+
+# Windows cmd: docker run -p 3000:3000 -v /app/node_modules -v %cd%:/app 67fefd7b27ad
